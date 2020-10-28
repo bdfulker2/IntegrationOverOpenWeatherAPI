@@ -22,7 +22,7 @@ namespace RetrieveOpenWeatherAPIData.Controllers
         }
 
         [HttpGet]
-        public ActionResult<CurrentWeatherForecast> Get()
+        public ActionResult<CurrentWeatherForecastRoot> Get()
         {
            
         }
