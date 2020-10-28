@@ -9,8 +9,8 @@ using RetrieveOpenWeatherAPIData;
 namespace RetrieveOpenWeatherAPIData.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    [Route("api.openweather.org/data/2.5/weather?q={city name},{state code},{country code}&appid={/[controller]")]
+    //[Route("[controller]")]
+    //[Route("api.openweather.org/data/2.5/weather?q={city name},{state code},{country code}&appid={/[controller]")]
     [Consumes("application/json", "text/json")]
     public class CurrentWeatherForecastController : ControllerBase
     { 
@@ -21,10 +21,10 @@ namespace RetrieveOpenWeatherAPIData.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public ActionResult<CurrentWeatherForecastRoot> Get()
-        {
+        //[HttpGet]
+        //public ActionResult<CurrentWeatherForecastRoot> Get()
+        //{
            
-        }
+        //}
     }
 }
