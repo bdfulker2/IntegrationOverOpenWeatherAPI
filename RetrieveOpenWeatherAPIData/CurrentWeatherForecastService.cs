@@ -1,33 +1,48 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace RetrieveOpenWeatherAPIData
 {
     public class CurrentWeatherForecastService : ICurrentWeatherForecastService<CurrentWeatherForecastRoot>
     {
+        //Readonly access to ILogger
         private readonly ILogger _logger;
-        private readonly string _currentWeatherApiKey;// = "b2606ae6893ffc32d31fc1a1eac04365";
+
+        //readonly access to _currentWeatherApiKey
+        private readonly string _currentWeatherApiKey;
+
+        //Property for CityName
         private string CityName { get; set; }
+
+        //Property for StateCode
         private string StateCode { get; set; }
+
+        //Property for CountryCode
         private string CountryCode { get; set; }
+        
+        //Property for CurrentForecast
         private static CurrentWeatherForecastRoot CurrentForecast { get; set; } 
 
-
+        /// <summary>
+        /// Constructor with dependency injection of IConfigLibrarySettings and ILogger
+        /// </summary>
+        /// <param name="settings">provides access to CurrentWeatherForecastApiKey through dependency injection</param>
+        /// <param name="logger">provides access to ILogger through dependency injection</param>
         public CurrentWeatherForecastService(IConfigLibrarySettings settings, ILogger<CurrentWeatherForecastService> logger)
         {
             _currentWeatherApiKey = settings.CurrentWeatherForecastApiKey;
-            _logger = logger;
-            // _logger.LogInformation(settings.CurrentWeatherForecastApiKey);
+            _logger = logger; 
         }
 
+        /// <summary>
+        /// Calls asynchronous task for calling openWeatherAPI for accessing their current weather forcast.
+        /// </summary>
+        /// <param name="city">city name for weather forecast</param>
+        /// <param name="stateCode">state code for US only. Ignored if countryCode isn't "US"</param>
+        /// <param name="countryCode">two digit country code follows ISO 3166</param>
+        /// <returns>CurrentWeatherForecastRoot object from the external url api call</returns>
         public CurrentWeatherForecastRoot GetCurrentWeather(string city, string stateCode, string countryCode)
         {
             var response = CurrentWeather(city, stateCode, countryCode);
@@ -35,6 +50,13 @@ namespace RetrieveOpenWeatherAPIData
             return CurrentForecast;
         }
 
+        /// <summary>
+        /// Asynchronous task for access OpenWeatherAPI.org current weather for one city
+        /// </summary>
+        /// <param name="city">city name for weather forecast</param>
+        /// <param name="stateCode">state code for US only. Ignored if countryCode isn't "US"</param>
+        /// <param name="countryCode">two digit country code follows ISO 3166</param>
+        /// <returns>returns Task</returns>
         public async Task CurrentWeather(string city, string stateCode, string countryCode)
         {
             CityName = city;
