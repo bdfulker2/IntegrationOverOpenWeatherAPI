@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Converters;
 
 namespace RetrieveOpenWeatherAPIData
 {
@@ -25,11 +27,21 @@ namespace RetrieveOpenWeatherAPIData
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigLibrary weatherConfig = new ConfigLibrary();
-            Configuration.GetSection("ApiKeys").Bind(weatherConfig);
-            
-            services.AddSingleton<ConfigLibrary>(weatherConfig);
-            services.AddControllers();
+            //dependency injection for CodeCanaryDatabaseSetting
+            services.Configure<ConfigLibrarySettings>(
+                Configuration.GetSection(nameof(ConfigLibrarySettings)));
+
+            //dependency injection 
+            services.AddSingleton<IConfigLibrarySettings>(sp =>
+                sp.GetRequiredService<IOptions<ConfigLibrarySettings>>().Value);
+            //ConfigLibrary weatherConfig = new ConfigLibrary();
+            //Configuration.GetSection("ApiKeys").Bind(weatherConfig);
+
+            services.AddScoped<ICurrentWeatherForecastService<CurrentWeatherForecastRoot>, CurrentWeatherForecastService>();
+            //services.AddSingleton<ILogger>();
+
+            services.AddControllers().AddNewtonsoftJson(options => options.UseMemberCasing());
+            services.AddMvc().AddNewtonsoftJson(options => options.SerializerSettings.Converters.Add(new StringEnumConverter()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
