@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace RetrieveOpenWeatherAPIData.Controllers
@@ -23,7 +24,20 @@ namespace RetrieveOpenWeatherAPIData.Controllers
             _ICurrentWeatherService = currentWeatherService;
         }
 
+        /// Route: /api/CurrentWeatherForecast?city={cityName}&stateCode={stateCode}&countryCode={ISO 3166 country code}
+        /// <summary>
+        /// Retrieves current weather for one city
+        /// </summary>
+        /// <remarks>
+        /// Returns Current weather of specified city. 
+        /// </remarks>
+        /// <param name="city">String name of city</param>
+        /// <param name="stateCode">State code only needed if US is the country code</param>
+        /// <param name="countryCode">Two digit country code using ISO 3166</param>
+        /// <returns>Returns all buildStatus document is collection</returns>
+        /// <response code = "200">Success list of records found</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CurrentWeatherForecastRoot))]
         public ActionResult<CurrentWeatherForecastRoot> GetCurrentWeather(string city, string stateCode, string countryCode)
         {
             //https://localhost:44353/api/CurrentWeatherForecast?city=Naples&stateCode=FL&countryCode=US/
