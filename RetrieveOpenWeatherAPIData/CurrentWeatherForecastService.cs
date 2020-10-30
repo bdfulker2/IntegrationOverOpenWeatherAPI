@@ -12,15 +12,6 @@ namespace RetrieveOpenWeatherAPIData
 
         //readonly access to _currentWeatherApiKey
         private readonly string _currentWeatherApiKey;
-
-        //Property for CityName
-        private string CityName { get; set; }
-
-        //Property for StateCode
-        private string StateCode { get; set; }
-
-        //Property for CountryCode
-        private string CountryCode { get; set; }
         
         //Property for CurrentForecast
         private static CurrentWeatherForecastRoot CurrentForecast { get; set; } 
@@ -59,12 +50,9 @@ namespace RetrieveOpenWeatherAPIData
         /// <returns>returns Task</returns>
         public async Task CurrentWeather(string city, string stateCode, string countryCode)
         {
-            CityName = city;
-            StateCode = stateCode;
-            CountryCode = countryCode;
             var httpClient = HttpClientFactory.Create();
 
-            var url = $"https://api.openweathermap.org/data/2.5/weather?q={CityName},{StateCode},{CountryCode}&appid={_currentWeatherApiKey}";
+            var url = $"https://api.openweathermap.org/data/2.5/weather?q={city},{stateCode},{countryCode}&appid={_currentWeatherApiKey}";
 
             HttpResponseMessage httpResponse;
             try
