@@ -24,18 +24,18 @@ namespace RetrieveOpenWeatherAPIData.Controllers
             _ICurrentWeatherService = currentWeatherService;
         }
 
-        /// Route: /api/CurrentWeatherForecast?city={cityName}&stateCode={stateCode}&countryCode={ISO 3166 country code}
+        //Route: /api/CurrentWeatherForecast?city={cityName}&stateCode={stateCode}&countryCode={ISO 3166 country code}
         /// <summary>
-        /// Retrieves current weather for one city
+        /// Retrieves current weather forecast for a single city.
         /// </summary>
         /// <remarks>
-        /// Returns Current weather of specified city. 
+        /// Returns Current weather for a specified city.
         /// </remarks>
-        /// <param name="city">String name of city</param>
-        /// <param name="stateCode">State code only needed if US is the country code</param>
-        /// <param name="countryCode">Two digit country code using ISO 3166</param>
-        /// <returns>Returns all buildStatus document is collection</returns>
-        /// <response code = "200">Success list of records found</response>
+        /// <param name="city">name of city</param>
+        /// <param name="stateCode">enter for US city only</param>
+        /// <param name="countryCode">Two digits using ISO 3166</param>
+        /// <returns>Returns current weather for a specified city</returns>
+        /// <response code = "200">Success current weather for city specified was found!</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CurrentWeatherForecastRoot))]
         public ActionResult<CurrentWeatherForecastRoot> GetCurrentWeather(string city, string stateCode, string countryCode)

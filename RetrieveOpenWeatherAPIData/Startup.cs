@@ -65,7 +65,6 @@ namespace RetrieveOpenWeatherAPIData
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
-
             });
 
             /*above must be included for swashbuckle.AspNetCore package*/

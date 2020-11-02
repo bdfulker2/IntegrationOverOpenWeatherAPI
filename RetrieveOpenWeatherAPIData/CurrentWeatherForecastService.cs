@@ -58,11 +58,11 @@ namespace RetrieveOpenWeatherAPIData
 
             try
             {
-                httpResponse = await httpClient.GetAsync(url);
+                httpResponse = await httpClient.GetAsync(url).ConfigureAwait(false);
                 if (httpResponse.StatusCode == HttpStatusCode.OK)
                 {
                     var responseContent = httpResponse.Content;
-                    CurrentForecast =  await responseContent.ReadAsAsync<CurrentWeatherForecastRoot>();
+                    CurrentForecast =  await responseContent.ReadAsAsync<CurrentWeatherForecastRoot>().ConfigureAwait(false);
                 }
                 _logger.LogInformation(httpResponse.StatusCode.ToString());
             }catch(HttpRequestException e)
