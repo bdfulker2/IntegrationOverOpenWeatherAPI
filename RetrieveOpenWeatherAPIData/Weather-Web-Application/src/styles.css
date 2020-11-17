@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+/*@import "bootstrap/dist/css/bootstrap.darkly.css";*/
+html {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+ /* background: url(/assets/background.jpg) fixed center no-repeat;*/
+  background-size: cover;
+  font-family: Roboto, sans-serif;
+  margin: 0px;
+  margin-top: 0px;
+}
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42A948;
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
