@@ -1,0 +1,67 @@
+.example-container {
+    position: absolute;
+    top: 60px;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+}
+
+.example-sidenav {
+    /*z-index: 200;*/
+    padding: 5px;
+    border: 3px;
+    border-bottom-color: whitesmoke;
+    display: initial;
+    align-items: center;
+    justify-content: center;
+    width: 15vw;
+    height: 90vh;
+    background: rgba(255, 255, 255, .9) !important;
+    background-color: rebeccapurple !important;
+    visibility: visible;
+    color: green;
+}
+
+#example-content{
+
+  height: 90%;
+}
+
+#sidenav {
+  background: rgb(255, 255, 255) !important;
+  background: rgba(255, 255, 255, .9) !important;
+  background-color: rebeccapurple !important;
+}
+
+.header {
+    height: 55px;
+    position: fixed;
+    background-color: green;
+    top:0;
+    right:0;
+    left:0;
+}
+
+.footer {
+  height: 55px;
+  position: fixed;
+  align-content: center;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.text-xs-center {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  height: 5vh;
+  width: 100vw;
+  background: url(/assets/background.jpg) fixed center no-repeat;
+  background-size: cover;
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+}
+

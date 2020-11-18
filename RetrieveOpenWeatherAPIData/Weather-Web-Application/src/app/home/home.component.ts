@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  options: FormGroup;
+  constructor(formBuilder: FormBuilder) {
+    this.options = formBuilder.group({
+      bottom: 0,
+      fixed: false,
+      top: 0,
+    })
+  }
 
   ngOnInit(): void {
   }
-
+  shouldRun = true;
 }
