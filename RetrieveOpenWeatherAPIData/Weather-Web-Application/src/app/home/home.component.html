@@ -1,43 +1,30 @@
-
-<!--<ng-container *ngIf="shouldRun">-->
 <div>
-  <mat-toolbar class="header">Weather Api</mat-toolbar>
+  <mat-toolbar class="header">
+      <button id="nav-button" type="button" class="btn btn-primary" (click)="sidenav.toggle()"></button>
+      <strong class="title">Weather Api Application</strong>
+  </mat-toolbar>
 </div>
 <div>
   <mat-sidenav-container class="example-container">
-    <!--<mat-sidenav #sidenav mode="side" opened="true" opened-class="example-sidenav" [fixedInViewport]="options.value.fixed" [fixedTopGap]="options.value.top"
-                 [fixedBottomGap]="options.value.bottom">
-      {{options.value.fixed ? 'Fixed' : 'Non-fixed'}} Sidenav
-    </mat-sidenav>-->
     <mat-sidenav #sidenav mode="side" opened="true" class="example-sidenav dark-theme" [fixedInViewport]="options.value.fixed">
-      {{options.value.fixed ? 'Fixed' : 'Non-fixed'}} Sidenav
+      <!--{{options.value.fixed ? 'Fixed' : 'Non-fixed'}}--> Sidenav
     </mat-sidenav>
     <mat-sidenav-content id="example-content" [formGroup]="options">
 
-      <!--<p><mat-checkbox formControlName="fixed">Fixed</mat-checkbox></p>
-      <p>
-        <mat-form-field>
-          <mat-label>Top gap</mat-label>
-          <input matInput type="number" formControlName="top">
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field>
-          <mat-label>Bottom gap</mat-label>
-          <input matInput type="number" formControlName="bottom">
-        </mat-form-field>
-      </p>-->
-
-
-     
-      <button type="button" class="btn btn-primary" (click)="sidenav.toggle()">Open/Close Sidenav</button>
-      <router-outlet></router-outlet>
+      <div class="container">
+        <ng-container *ngIf="shouldRun">
+        <router-outlet></router-outlet>
+        </ng-container>
+        <table>
+          <div class="alert alert-dissmissible alert-info" *ngIf="!shouldRun">Retrieving data please wait!</div>
+        </table>
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
   <footer>
     <mat-toolbar-row class="footer"><p class="text-xs-center">© Copyright 2020 Benjamin Fulker, Inc. All rights reserved.</p></mat-toolbar-row>
   </footer>
-<!--</ng-container>-->
 
-<div *ngIf="!shouldRun">Retrieving data please wait!</div>
+
+
